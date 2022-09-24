@@ -99,8 +99,6 @@ func sendRestMsg(ws *websocket.Conn, msg string) {
 
 ## Output Sample
 ### Server Side
-$ go build -o WS-Server WS-Server.go  
-$ ./WS-Server  
 11:20:43.126515 Receive : {"REST-Key":"REST-Value1"}, from Client  
 11:20:43.126656 Send : {"REST-Key":"REST-Value1"}, to Client  
 11:20:43.126666 Receive : {"REST-Key":"REST-Value2"}, from Client  
@@ -108,8 +106,6 @@ $ ./WS-Server
 11:20:43.126677 Receive : {"REST-Key":"REST-Value3"}, from Client  
 11:20:43.126683 Send : {"REST-Key":"REST-Value3"}, to Client  
 ### Client Side
-$ go build -o WS-Client WS-Client.go  
-$ ./WS-Client  
 11:20:43.126473 Send : {"REST-Key":"REST-Value1"}, to Server  
 11:20:43.126593 Send : {"REST-Key":"REST-Value2"}, to Server  
 11:20:43.126603 Send : {"REST-Key":"REST-Value3"}, to Server  
@@ -121,5 +117,17 @@ $ ./WS-Client
 ![スクリーンショット 2022-09-24 11 20 56](https://user-images.githubusercontent.com/36861752/192076607-a64cb7c2-953e-4a6f-b569-09930e9627ca.png)
 
 ## Output Procedure
-1, Start server program.  
-2, Start client program.  
+### Linux(or Mac)
+#### Start server program.  
+$ go build -o WS-Server WS-Server.go  
+$ ./WS-Server  
+#### Start client program.  
+$ go build -o WS-Client WS-Client.go  
+$ ./WS-Client 
+### Windows
+#### Start server program.  
+$ go build -o WS-Server.exe WS-Server.go  
+$ ./WS-Server.exe  
+#### Start client program.  
+$ go build -o WS-Client.exe WS-Client.go  
+$ ./WS-Client.exe 
