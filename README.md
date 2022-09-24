@@ -127,7 +127,7 @@ $ ./WS-Client
 ### Windows
 #### Start server program.  
 $ go build -o WS-Server.exe WS-Server.go  
-$ ./WS-Server.exe  
+$ WS-Server.exe  
 #### Start client program.  
 $ go build -o WS-Client.exe WS-Client.go  
-$ ./WS-Client.exe 
+$ WS-Client.exe 
