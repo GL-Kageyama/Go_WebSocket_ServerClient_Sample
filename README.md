@@ -13,7 +13,7 @@ import (
 	"golang.org/x/net/websocket"
 )
 
-// WebSocket Client Sample
+// WebSocket Server Sample
 func main() {
 	log.SetFlags(log.Lmicroseconds)
 
