@@ -4,11 +4,94 @@
 
 ## Server Code
 ```Go
+import (
+	"log"
+	"net/http"
 
+	"golang.org/x/net/websocket"
+)
+
+// WebSocket Client Sample
+func main() {
+	log.SetFlags(log.Lmicroseconds)
+
+	http.Handle(
+		"/",
+		websocket.Handler(func(ws *websocket.Conn) {
+			defer ws.Close()
+			for {
+				// Receive Logic
+				var msg string
+				recvErr := websocket.Message.Receive(ws, &msg)
+				if recvErr != nil {
+					log.Fatal(recvErr)
+					break
+				}
+				log.Println("Receive : " + msg + ", from Client")
+
+				// Send Logic
+				sendErr := websocket.Message.Send(ws, msg)
+				if sendErr != nil {
+					log.Fatal(sendErr)
+					break
+				}
+				log.Println("Send : " + msg + ", to Client")
+			}
+		}),
+	)
+
+	// WebSocket Listen and Serve
+	err := http.ListenAndServe("localhost:8000", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
 ```
 
 ## Client Code
 ```Go
+import (
+	"log"
+
+	"golang.org/x/net/websocket"
+)
+
+// WebSocket Client Sample
+func main() {
+	log.SetFlags(log.Lmicroseconds)
+
+	// WebSocket Dial
+	ws, dialErr := websocket.Dial("ws://localhost:8000", "", "http://localhost:8000")
+	if dialErr != nil {
+		log.Fatal(dialErr)
+	}
+	defer ws.Close()
+
+	// Send Message
+	sendRestMsg(ws, `{"REST-Key":"REST-Value1"}`)
+	sendRestMsg(ws, `{"REST-Key":"REST-Value2"}`)
+	sendRestMsg(ws, `{"REST-Key":"REST-Value3"}`)
+
+	// Receive Message Ligic
+	var recvMsg string
+	for {
+		recvErr := websocket.Message.Receive(ws, &recvMsg)
+		if recvErr != nil {
+			log.Fatal(recvErr)
+			break
+		}
+		log.Println("Receive : " + recvMsg + ", from Server")
+	}
+}
+
+// Send Message Ligic
+func sendRestMsg(ws *websocket.Conn, msg string) {
+	sendErr := websocket.Message.Send(ws, msg)
+	if sendErr != nil {
+		log.Fatal(sendErr)
+	}
+	log.Println("Send : " + msg + ", to Server")
+}
 
 ```
 
@@ -33,6 +116,7 @@ $ ./WS-Client
 11:20:43.126719 Receive : {"REST-Key":"REST-Value3"}, from Server 
 
 ## Output Image
+![スクリーンショット 2022-09-24 11 20 56](https://user-images.githubusercontent.com/36861752/192076607-a64cb7c2-953e-4a6f-b569-09930e9627ca.png)
 
 ## Output Procedure
 1,  
