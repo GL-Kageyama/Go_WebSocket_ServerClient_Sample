@@ -1,6 +1,8 @@
 # Go WebSocket Server and Client Sample
 
 ## WebSocket
+WebSocket is a technology that enables bi-directional asynchronous communication between server and client.  
+It is used to notify the client immediately or to push data from the server to the client.  
 
 ## Server Code
 ```Go
@@ -119,5 +121,5 @@ $ ./WS-Client
 ![スクリーンショット 2022-09-24 11 20 56](https://user-images.githubusercontent.com/36861752/192076607-a64cb7c2-953e-4a6f-b569-09930e9627ca.png)
 
 ## Output Procedure
-1,  
-2,  
+1, Start server program.  
+2, Start client program.  
